@@ -22,21 +22,12 @@ stage ('Executing Test Cases') {
 		  }
 
 		}
-
-stage ('Packges') {
-		steps {
-		  withMaven(maven : 'maven') {
-			sh 'mvn package'
-
-			}
-		  }
-}
 		
 		
-stage("SonarQube analysis") {
+stage("Build & SonarQube analysis") {
           steps {
               withSonarQubeEnv('Sonar') {
-                 sh 'mvn sonar:sonar'
+                 sh 'mvn clean package sonar:sonar'
               }
           }
       }		
