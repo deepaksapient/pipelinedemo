@@ -36,7 +36,7 @@ stage ('Packges') {
 stage("SonarQube analysis") {
           node {
               withSonarQubeEnv('Sonar') {
-                 sh 'mvn sonar:sonar'
+                 sh 'mvn clean package sonar:sonar'
               }
           }
       }		
