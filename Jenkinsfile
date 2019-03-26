@@ -30,7 +30,7 @@ stage ('Deployment') {
 
 			}
 		  }
-
+}
 	stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
@@ -43,7 +43,7 @@ stage ('Deployment') {
         }
 	
 		}
-	}
+	
 
 
 }
