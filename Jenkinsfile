@@ -23,7 +23,7 @@ stage ('Executing Test Cases') {
 
 		}
 
-stage ('Deployment') {
+stage ('Packges') {
 		steps {
 		  withMaven(maven : 'maven') {
 			sh 'mvn package'
@@ -31,6 +31,16 @@ stage ('Deployment') {
 			}
 		  }
 }
+		
+		
+stage("SonarQube analysis") {
+          node {
+              withSonarQubeEnv('Sonar') {
+                 sh 'mvn sonar:sonar'
+              }
+          }
+      }		
+		
 	stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
