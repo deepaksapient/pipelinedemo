@@ -30,13 +30,13 @@ stages{
 		  }
 
 		}	
-    stage ('Deployments'){            
+              
                 stage ('Deploy to Dev'){
                     steps {
                         sh "cp **/target/*.war /var/lib/tomcat/webapps/"
 			//sh "scp **/target/*.war /var/lib/tomcat/webapps/"
                     }
                 }            
-        }
+        
     }
 }
