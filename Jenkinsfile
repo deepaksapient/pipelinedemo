@@ -27,7 +27,7 @@ stages{
               
                 stage ('Deploy to Dev'){
                     steps {
-                        sh "cp /var/lib/jenkins/workspace/NewPipelineDemo/target/*.war /var/lib/tomcat/webapps/"
+                        sh "sudo -u tomcat cp /var/lib/jenkins/workspace/NewPipelineDemo/target/*.war /var/lib/tomcat/webapps/"
 			//sh "scp **/target/*.war /var/lib/tomcat/webapps/"
                     }
                 }            
