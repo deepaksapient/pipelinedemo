@@ -1,19 +1,27 @@
 pipeline {
-	agent any
+    agent any
 
-	stages {
+    parameters {
+         string(name: 'tomcat_dev', defaultValue: 'http://10.0.1.13:9090/', description: 'Dev Server')
+    }
 
-	     stage ('Compile') {
-		steps {
-		  withMaven(maven : 'maven') {
-			sh 'mvn clean compile'
+    triggers {
+         pollSCM('* * * * *')
+     }
 
-			}
-		  }
-
-		}
-
-stage ('Executing Test Cases') {
+stages{
+    stage('Build'){
+            steps {
+                sh 'mvn clean package'
+            }
+            post {
+                success {
+                    echo 'Now Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }
+	stage ('Executing Test Cases') {
 		steps {
 		  withMaven(maven : 'maven') {
 			sh 'mvn test'
@@ -21,17 +29,14 @@ stage ('Executing Test Cases') {
 			}
 		  }
 
-		}
-		
-		
-stage("Build & SonarQube analysis") {
+		}	
+    stage("Build & SonarQube analysis") {
           steps {
               withSonarQubeEnv('Sonar') {
                  sh 'mvn clean package sonar:sonar'
               }
           }
       }		
-		
 	stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
@@ -39,9 +44,13 @@ stage("Build & SonarQube analysis") {
                 }
             }
         }
-	
-		}
-	
-
-
+    stage ('Deployments'){            
+                stage ('Deploy to Dev'){
+                    steps {
+                        sh "cp **/target/*.war /var/lib/tomcat/webapps/"
+			//sh "scp **/target/*.war /var/lib/tomcat/webapps/"
+                    }
+                }            
+        }
+    }
 }
