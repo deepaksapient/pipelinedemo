@@ -13,13 +13,7 @@ stages{
     stage('Build'){
             steps {
                 sh 'mvn clean package'
-            }
-            post {
-                success {
-                    echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '/var/lib/jenkins/workspace/NewPipelineDemo/target/*.jar'
-                }
-            }
+            }            
         }
 	stage ('Executing Test Cases') {
 		steps {
