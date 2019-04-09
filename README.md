@@ -1,15 +1,12 @@
-# simple-java-maven-app
+# sparkjava-war-example
+Build war with maven and sparkjava framework
 
-This repository is for the
-[Build a Java app with Maven](https://jenkins.io/doc/tutorials/build-a-java-app-with-maven/)
-tutorial in the [Jenkins User Documentation](https://jenkins.io/doc/).
+Steps:
 
-The repository contains a simple Java application which outputs the string
-"Hello world!" and is accompanied by a couple of unit tests to check that the
-main application works as expected. The results of these tests are saved to a
-JUnit XML report.
-
-The `jenkins` directory contains an example of the `Jenkinsfile` (i.e. Pipeline)
-you'll be creating yourself during the tutorial and the `scripts` subdirectory
-contains a shell script with commands that are executed when Jenkins processes
-the "Deliver" stage of your Pipeline.
+1. Download a fresh [Tomcat 8 distribution](https://tomcat.apache.org/download-80.cgi)
+2. Clone this repository to your local machine
+3. Run mvn package
+4. Copy the generated `sparkjava-hello-world-1.0.war` to the Tomcat `webapps` folder
+5. Start Tomcat by running `bin\startup.bat` (or `bin\startaup.sh` for Linux)
+5. Tomcat will automatically deploy the war
+6. Open [http://localhost:8080/sparkjava-hello-world-1.0/hello](http://localhost:8080/sparkjava-hello-world-1.0/hello) in your browser
