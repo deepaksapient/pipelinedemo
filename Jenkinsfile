@@ -17,7 +17,7 @@ stages{
             post {
                 success {
                     echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
+                    archiveArtifacts artifacts: '/var/lib/jenkins/workspace/NewPipelineDemo/target/*.jar'
                 }
             }
         }
