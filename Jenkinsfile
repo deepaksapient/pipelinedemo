@@ -49,7 +49,7 @@ stages{
           "files": [
             {
               "pattern": "*.war",
-              "target": "pipeilinedemo "
+              "target": "pipelinedemo"
             }
          ]
         }"""
