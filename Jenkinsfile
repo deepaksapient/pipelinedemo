@@ -40,5 +40,22 @@ stages{
           }
       }		
         
+	stage ('Artifactory configuration') {
+            steps {
+                rtUpload (
+    serverId: "pipeilinedemo",
+    spec:
+        """{
+          "files": [
+            {
+              "pattern": "*.war",
+              "target": "pipeilinedemo "
+            }
+         ]
+        }"""
+)
+            }
+        }
+	
     }
 }
