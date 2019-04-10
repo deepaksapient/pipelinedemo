@@ -30,7 +30,22 @@ stages{
                         sh "sudo -u tomcat cp /var/lib/jenkins/workspace/NewPipelineDemo/target/*.war /var/lib/tomcat/webapps/"
 			//sh "scp **/target/*.war /var/lib/tomcat/webapps/"
                     }
-                }            
+                }  
+	
+	stage("Build & SonarQube analysis") {
+          steps {
+              withSonarQubeEnv('Sonar') {
+                 sh 'mvn clean package sonar:sonar'
+              }
+          }
+      }		
+	stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
         
     }
 }
