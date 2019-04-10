@@ -43,7 +43,7 @@ stages{
 	stage ('Artifactory configuration') {
             steps {
                 rtUpload (
-    serverId: "pipeilinedemo",
+    serverId: "Pipelinedemo",
     spec:
         """{
           "files": [
