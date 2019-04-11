@@ -35,7 +35,7 @@ stages{
 	stage("SonarQube analysis") {
           steps {
               withSonarQubeEnv('Sonar') {
-                 sh 'mvn sonar:sonar -Dsonar.host.url=http://40.70.3.53:9000 -Dsonar.login=2546598c8d5b9277e3d92140ab70b207c2002e7e'
+                 sh 'mvn sonar:sonar -Dsonar.host.url=http://10.0.1.13:9000 -Dsonar.login=2546598c8d5b9277e3d92140ab70b207c2002e7e'
               }
           }
       }		
